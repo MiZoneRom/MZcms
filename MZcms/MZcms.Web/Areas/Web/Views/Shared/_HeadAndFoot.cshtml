@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="keywords" content="MiZone" />
+    <meta name="description" content="MiZone" />
+    <meta name="viewport" content="width=device-width" />
+    <meta property="Generator" content="MiZone" />
+    <title>@ViewBag.Title</title>
+    @RenderSection("Style", false)
+    @RenderSection("Script", false)
+</head>
+<body>
+    <!--_HeadAndFoot start-->
+    @RenderSection("Header")
+
+    @RenderBody()
+
+    @RenderSection("Foot")
+
+    @RenderSection("ScriptLast", false)
+
+</body>
+</html>

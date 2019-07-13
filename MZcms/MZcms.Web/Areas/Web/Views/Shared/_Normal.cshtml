@@ -1,0 +1,31 @@
+﻿@{
+	Layout = "_HeadAndFoot.cshtml";
+}
+
+@section Style
+{
+	@RenderSection("Style", false)
+}
+@section Script
+{
+	@RenderSection("Script",false)
+}
+
+@if (IsSectionDefined("Header"))
+{
+	@section Header
+	{
+		@RenderSection("Header")
+	}
+}
+<!--_Normal start-->
+@RenderBody()
+<!--_Normal end-->
+
+@if (IsSectionDefined("Foot"))
+{
+	@section Foot
+	{
+		@RenderSection("Foot")
+	}
+}

@@ -1,0 +1,180 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Areas/Admin/Content/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/artdialog.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/adminlte/css/adminlte.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition login-page">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            <a href="/"><b>MZ</b>cms</a>
+        </div>
+
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">登录后台管理系统</p>
+
+                <form>
+
+                    <div class="input-group mb-3">
+                        <input type="text" name="username" id="username" autocomplete="off" placeholder="用户名" class="form-control">
+                        <div class="input-group-append input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" id="password" placeholder="密码" class="form-control">
+                        <div class="input-group-append input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+
+                    <div class="row" id="checkcodebox" style="display:none;">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <input type="text" name="checkcode" id="checkcode" placeholder="图形验证码" class="form-control">
+                                <div class="input-group-append input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <img src="Login/GetCheckCode" class="layadmin-user-login-codeimg" id="checkcodeimg" title="点击更换验证码">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="keeplogin" name="keeplogin">
+                                <label for="keeplogin">
+                                    记住密码
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <input class="btn btn-primary btn-block" type="button"  id="submit" value="立即提交" />
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+        <!-- /.login-card-body -->
+
+    </div>
+
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script src="~/Scripts/jquery.artDialog.js"></script>
+    <script src="~/Scripts/jquery.artDialog.iframeTools.js"></script>
+
+    <script type="text/javascript">
+
+        var path = '@Url.Action("Login")';
+        path = path.substring(0, path.lastIndexOf('/') + 1);
+
+        $(function () {
+
+            $('#checkcodeimg').click(function () {
+                $('#checkcode').focus();
+                changeCheckCode();
+            });
+
+            //点击提交按钮
+            $('#submit').click(function () {
+
+                var dialog = showLoading();
+
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var checkcode = $('#checkcode').val();
+
+                if (username == '' || password == '') {
+                    dialog.close();
+                    $.dialog.errorTips("请输入用户名及密码");
+                    return;
+                }
+
+                $.ajax({
+                    type: 'post',
+                    url: path + 'Login',
+                    data: {
+                        username: username,
+                        password: password,
+                        checkCode: checkcode
+                    },
+                    dataType: "json",
+                    async: true,
+                    success: function (result) {
+
+                        dialog.close();
+
+                        //登录成功
+                        if (result.success) {
+
+                            var options = { path: "/" };
+
+                            if ($('#keeplogin').attr('checked'))
+                                options.expires = 365;
+
+                            var url = QueryString('return');
+                            if (!url)
+                                url = '/Admin';
+
+                            location.replace(url);
+
+                        } else {
+
+                            $('#checkcode').val('');
+
+                            if (result.errorTimes >= result.minTimesWithoutCheckCode) {
+                                var checkCode = $('#checkcodebox');
+                                var display = checkCode.css('display') != 'none';
+                                if (!display) {
+                                    checkCode.show();
+                                    $('#checkcode').focus();
+                                }
+                                else
+                                    changeCheckCode();
+                            }
+
+                            $.dialog.errorTips(result.msg);
+
+                        }
+
+                    }, error: function () {
+                        $.dialog.errorTips(result.msg);
+                    }
+                });
+
+            });
+
+        });
+
+        function changeCheckCode() {
+            $('#checkcodeimg').attr('src', path + 'GetCheckCode?time=' + new Date().getTime());
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+﻿<script>
+    //选择菜单
+    var localStorageKey = "SelectmenuItem-LocalStorageKey";
+
+    //点击导航后保存地址到浏览器缓存
+    if (window.localStorage) {
+        $(document).on('click', '.nav-sidebar .nav-treeview a', function (e) {
+            window.localStorage.setItem(localStorageKey, $(e.target).attr('href'));
+        });
+    }
+
+    //当前页面地址
+    var url = location.href;
+
+    var headimgurl = QueryString('displayUrl');
+    if (headimgurl)
+        url = headimgurl;
+
+    var dropdownMenu = findMenuItem(url);
+
+    //如果没找到导航
+    if (dropdownMenu == null && window.localStorage) {
+        var value = window.localStorage.getItem(localStorageKey);
+        if (value)
+            dropdownMenu = findMenuItem(value);
+    }
+    else {
+        window.localStorage.setItem(localStorageKey, location.pathname);
+    }
+
+    var parentObj = dropdownMenu.parents('.nav-item');
+    var groupName = parentObj.children('.nav-link').text();
+    var pageName = dropdownMenu.find('.nav-link.active').text();
+    $('#page_name').html(pageName);
+    $('#breadcrumb_page_name').html(pageName);
+    $('#page_group').html(groupName);
+
+    //找到当前导航菜单
+    function findMenuItem(url) {
+
+        var dropdownMenu;
+
+        //循环导航列表
+        $('.nav-sidebar .nav-treeview a').each(function () {
+
+            if (dropdownMenu)
+                return;
+
+            var a = $(this);
+            var href = a.attr('href');
+
+            if (url.indexOf("?") < 0) {
+                href = href.split("?")[0];
+            }
+
+            var index = url.toLowerCase().indexOf(href.toLowerCase());
+
+            if (url.toLowerCase() == href.toLowerCase() || index >= 0 && index + href.length == url.length) {//判断地址栏的地址是否以a的href结尾
+
+                var dm = a.closest('.nav-treeview');
+
+                if (dm.length > 0) {
+                    var li = dm.closest('li');
+
+                    if (li.length > 0) {
+                        li.addClass('menu-open');
+                        li.children('.nav-link').addClass('active');
+                        a.closest('li').children('.nav-link').addClass('active');
+                        dropdownMenu = dm;
+                    }
+                }
+
+            }
+
+        });
+
+        return dropdownMenu;
+    }
+
+
+
+</script>

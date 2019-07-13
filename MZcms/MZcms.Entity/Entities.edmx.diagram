@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c3a7c6b112d44aebcfece020c8d4f84" Name="Diagram1">
+        <EntityTypeShape EntityType="MZcms.Entity.Users" Width="1.5" PointX="0.875" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MZcms.Entity.Managers" Width="1.5" PointX="0.875" PointY="0.5" />
+        <EntityTypeShape EntityType="MZcms.Entity.ManagerLog" Width="1.5" PointX="6.125" PointY="0.5" />
+        <EntityTypeShape EntityType="MZcms.Entity.UserGroups" Width="1.5" PointX="2.625" PointY="4.125" />
+        <EntityTypeShape EntityType="MZcms.Entity.SiteSettings" Width="1.5" PointX="0.875" PointY="9.5" />
+        <EntityTypeShape EntityType="MZcms.Entity.ManagerPrivileges" Width="1.5" PointX="2.625" PointY="0.5" />
+        <EntityTypeShape EntityType="MZcms.Entity.ManagersRoles" Width="1.5" PointX="4.375" PointY="0.5" />
+        <AssociationConnector Association="MZcms.Entity.FK_ManagerPrivileges_ManagersRoles" />
+        <AssociationConnector Association="MZcms.Entity.FK_ManagerLog_Managers" />
+        <AssociationConnector Association="MZcms.Entity.FK_Users_UserGroups" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,89 @@
+﻿@model MZcms.Web.Models.SiteSettingModel
+
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Edit", "SiteSetting", FormMethod.Post, new { url = "./Edit", id = "form" }))
+    {
+
+        <div class="card card-default">
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">网站名称</label>
+                            @Html.EditorFor(item => item.SiteName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group upload-img">
+                            <label class="control-label">Logo</label>
+                            @Html.EditorFor(item => item.Logo, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">网站电话</label>
+                            @Html.EditorFor(item => item.SitePhone, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">流量统计代码</label>
+                            @Html.TextAreaFor(item => item.FlowScript, new { @class = "form-control", rows = 5 })
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Title</label>
+                            @Html.EditorFor(item => item.Site_SEOTitle, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Keywords</label>
+                            @Html.EditorFor(item => item.Site_SEOKeywords, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            @Html.EditorFor(item => item.Site_SEODescription, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group switch-box">
+                            <label class="control-label">邮箱验证</label>
+                            @Html.CheckBoxFor(item => item.EmailVerifOpen)
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="control-label">单选框</label>
+                            @Html.RadioButton("RegisterType", "0", Model.RegisterType == MZcms.Model.SiteSettingsInfo.RegisterTypes.Normal, new { @title = "普通账号" })
+                            @Html.RadioButton("RegisterType", "1", Model.RegisterType == MZcms.Model.SiteSettingsInfo.RegisterTypes.Mobile, new { @title = "手机注册" })
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-control-block">
+                                <input class="btn btn-primary" type="button" id="Submit" value="保存" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/Uploader.js"></script>
+    <script type="text/javascript">
+
+        $("#form").initValidform();
+
+        $('.upload-img').Uploader({
+            imageDescript: '最佳尺寸：200*60  显示在商城头部、会员登录处等位置',
+        });
+
+    </script>
+}

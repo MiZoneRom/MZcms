@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @RenderSection("Styles", false)
+    <title>后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Areas/Admin/Content/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+    <link href="~/Content/artdialog.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/adminlte/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/style.css" rel="stylesheet" />
+    @RenderSection("HeadScript", false)
+    @{var area = (string)ViewContext.RouteData.DataTokens["area"];}
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        @{Html.RenderAction("Top", "AdminPublic");}
+
+        <div class="content-wrapper">
+
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark" id="page_name">-</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#" id="page_group">-</a></li>
+                                <li class="breadcrumb-item active" id="breadcrumb_page_name">-</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+
+            <div class="content">
+                @RenderBody()
+            </div>
+
+        </div>
+
+        @{Html.RenderAction("Bottom", "AdminPublic");}
+
+    </div>
+
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/jquery.artDialog.js"></script>
+    <script src="~/Scripts/jquery.artDialog.iframeTools.js"></script>
+    <script src="~/Areas/Admin/Content/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Areas/Admin/Content/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/Areas/Admin/Content/fastclick/fastclick.js"></script>
+    <script src="~/Areas/Admin/Content/adminlte/js/adminlte.min.js"></script>
+    <script src="~/Areas/Admin/Content/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+
+    @Html.Partial("_SelectMenuItem")
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

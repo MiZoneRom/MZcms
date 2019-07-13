@@ -1,0 +1,74 @@
+﻿@charset "utf-8";
+/*
+ * artDialog skin
+ * http://code.google.com/p/artdialog/
+ * (c) 2009-2011 TangBin, http://www.planeArt.cn
+ *
+ * This is licensed under the GNU LGPL, version 2.1 or later.
+ * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
+ */
+ 
+/* common start */
+/*.aui_outer {position: relative;display: flex;flex-direction: column;width: 100%;pointer-events: auto;background-color: #fff;background-clip: padding-box;border: 1px solid rgba(0,0,0,.2);border-radius: .3rem;box-shadow: 0 0.5rem 1rem rgba(0,0,0,.5);outline: 0;}
+table.aui_border, table.aui_dialog { border:0; margin:0; border-collapse:collapse; width:100%; }
+.aui_nw, .aui_n, .aui_ne, .aui_w, .aui_c, .aui_e, .aui_sw, .aui_s, .aui_se, .aui_header, .aui_tdIcon, .aui_main, .aui_footer { padding:0; }
+.aui_state_noTitle .aui_title { display:none; }
+.aui_content { *zoom:1; *display:inline; text-align:left; border:none 0; width: 100%; color:#6b6c6e;}
+.aui_content.aui_state_full { display:block; width:100%; margin:0; height:100%; padding:0 !important }
+.aui_loading { width:96px; height:32px; text-align:left; text-indent:-999em; overflow:hidden; background:url(../Images/loading.gif) no-repeat center center; }
+.aui_icon { display:none }
+.aui_icon div { width:48px; height:48px; margin:10px 0 10px 10px; background-position: center center; background-repeat:no-repeat; }
+.aui_buttons {display: flex;align-items: center;justify-content: flex-end;padding: 1rem;border-top: 1px solid #e9ecef;border-bottom-right-radius: .3rem;border-bottom-left-radius: .3rem;}
+
+.aui_buttons button:active{box-shadow: inset 0 3px 5px rgba(0,0,0,.125);}
+.aui_buttons button[disabled] { cursor:default; color:#666; background:#DDD; border: solid 1px #999; }
+button.aui_state_highlight {color: #fff;background-color: #3480c1;border-color: #3480c1;}*/
+
+/* common end */
+
+.aui_outer {position: relative;display: flex;flex-direction: column;width: 100%;pointer-events: auto;background-color: #fff;background-clip: padding-box;border: 1px solid rgba(0,0,0,.2);border-radius: .3rem;box-shadow: 0 0.5rem 1rem rgba(0,0,0,.5);outline: 0;-webkit-animation: dialog-show .3s;animation: dialog-show .3s;}
+
+
+.aui_nw, .aui_ne, .aui_sw, .aui_se { width:0; height:0; }
+.aui_titleBar {display: flex;align-items: flex-start;justify-content: space-between;padding: 1rem;border-bottom: 1px solid #e9ecef;border-top-left-radius: .3rem;border-top-right-radius: .3rem;}
+.aui_title {margin-bottom: 0;line-height: 1.5;font-weight: 500;font-size: 1.2rem;}
+.aui_close {float: right;font-size: 1.5rem;font-weight: 700;line-height: 1;color: #000;text-shadow: 0 1px 0 #fff;opacity: .5;padding: 1rem;margin: -1rem -1rem -1rem auto;}
+.aui_close:hover { opacity: .75;color: #000; }
+.aui_close:active { box-shadow: none; text-decoration:none}
+.aui_main {position: relative;flex: 1 1 auto;padding: 1rem;}
+.aui_main .icon {font-size: 1.25rem;margin-right:.4rem;}
+.aui_buttons {display: flex;align-items: center;justify-content: space-between;padding: 1rem;border-top: 1px solid #e9ecef;border-bottom-right-radius: .3rem;border-bottom-left-radius: .3rem;}
+.aui_buttons > :not(:last-child) {margin-right: .25rem;}
+.aui_buttons > :not(:first-child) {margin-left: .25rem;}
+
+/*提示框*/
+.aui_state_noTitle .aui_titleBar{border-bottom:0px;padding:0;}
+.aui_state_noTitle .aui_main {padding:0;}
+
+.dialog-confirm{}
+
+/*.aui_state_noTitle .aui_buttons{ text-align:center}
+.aui_state_noTitle .aui_buttons button{ font-size:12px; line-height:13px;position: relative;margin:0!important;left:15%;}
+.aui_state_noTitle .aui_content{ padding:0!important}
+.aui_state_noTitle .tips-black{background-color:#000; background-color: rgba(0, 0, 0, 0.7);border-radius: 0;font-size: 14px;padding: 10px 20px 20px !important; color:#fff;}
+.aui_state_noTitle .tips-black p{ text-align:center; line-height:60px; font-size:30px; height: 60px;}
+.aui_state_noTitle .tips-black p .glyphicon{line-height: 60px;}*/
+/*.aui_state_noTitle .aui_outer{ background:none; border:0;}*/
+
+    /*.aui_state_noTitle .aui_content div{padding:30px 50px!important;max-width: 500px!important;color:#494e52;margin:0!important;}*/
+/*.aui_state_noTitle .aui_state_highlight{left:-15%!important;}
+.aui_state_noTitle .aui_buttons{padding:10px 0;}*/
+
+/*样式重构*/
+/*
+.aui_state_focus.aui_state_lock .aui_content{padding:0 40px!important;}*/
+/*.dialog-admin{padding:30px 60px;max-width:500px;color:#494e52}*/
+
+/*加载框*/
+.loading-container{display: -webkit-box; display: flex; position: fixed; z-index: 1060; top: 0; right: 0; bottom: 0; left: 0; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; padding: .625em; overflow-x: hidden; background-color: transparent; -webkit-overflow-scrolling: touch; -webkit-transition: background-color .1s; transition: background-color .1s; background-color: rgba(0,0,0,.4);}
+.loading-popup{display: flex; position: relative; box-sizing: border-box; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; -webkit-box-pack: center; justify-content: center; max-width: 100%; padding: 1.25em; border: none; border-radius: .3125em; background: #fff; font-family: inherit; font-size: 1rem; -webkit-animation: dialog-show .3s; animation: dialog-show .3s;}
+.loading-actions{display: flex; z-index: 1; flex-wrap: wrap; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; width: 100%;}
+.loading-icon{border: 0; border-radius: .25em; background: initial; background-color: #3085d6; color: #fff; font-size: 1.0625em; box-sizing: border-box; width: 2.5em; height: 2.5em; margin: .46875em; padding: 0; -webkit-animation: rotate-loading 1.5s linear 0s infinite normal; animation: rotate-loading 1.5s linear 0s infinite normal; border: .25em solid transparent; border-radius: 100%; border-color: transparent; background-color: transparent !important; color: transparent; cursor: default; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; display: flex; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);}
+
+@-webkit-keyframes rotate-loading{0%{-webkit-transform: rotate(0); transform: rotate(0);} 100%{-webkit-transform: rotate(360deg); transform: rotate(360deg);}} @-webkit-keyframes dialog-show{0%{-webkit-transform: scale(0.7); transform: scale(0.7);} 45%{-webkit-transform: scale(1.05); transform: scale(1.05);} 80%{-webkit-transform: scale(0.95); transform: scale(0.95);} 100%{-webkit-transform: scale(1); transform: scale(1);}}
+@keyframes dialog-show{0%{-webkit-transform: scale(0.7); transform: scale(0.7);} 45%{-webkit-transform: scale(1.05); transform: scale(1.05);} 80%{-webkit-transform: scale(0.95); transform: scale(0.95);} 100%{-webkit-transform: scale(1); transform: scale(1);}}

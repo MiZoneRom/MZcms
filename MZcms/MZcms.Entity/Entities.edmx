@@ -1,0 +1,658 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MZcms.Entity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ManagerLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ActionType" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="UserIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagerPrivileges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Privilege" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="bigint" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="200" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagersRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" />
+          <Property Name="Value" Type="text" />
+        </EntityType>
+        <EntityType Name="UserGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Grade" Type="int" />
+          <Property Name="UpgradeExp" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Point" Type="int" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="IsUpgrade" Type="bit" Nullable="false" />
+          <Property Name="IsLock" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="bigint" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="200" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsMale" Type="bit" Nullable="false" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Area" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="QQ" Type="nvarchar" MaxLength="100" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Point" Type="int" />
+          <Property Name="Exp" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="RegDate" Type="datetime" Nullable="false" />
+          <Property Name="RegIP" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastLoginDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_ManagerLog_Managers">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="ManagerLog" Type="Self.ManagerLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManagerLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerPrivileges_ManagersRoles">
+          <End Role="ManagersRoles" Type="Self.ManagersRoles" Multiplicity="1" />
+          <End Role="ManagerPrivileges" Type="Self.ManagerPrivileges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagersRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManagerPrivileges">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserGroups">
+          <End Role="UserGroups" Type="Self.UserGroups" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MZcmsEntityStoreContainer">
+          <EntitySet Name="ManagerLog" EntityType="Self.ManagerLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagerPrivileges" EntityType="Self.ManagerPrivileges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagersRoles" EntityType="Self.ManagersRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteSettings" EntityType="Self.SiteSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ManagerLog_Managers" Association="Self.FK_ManagerLog_Managers">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="ManagerLog" EntitySet="ManagerLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerPrivileges_ManagersRoles" Association="Self.FK_ManagerPrivileges_ManagersRoles">
+            <End Role="ManagersRoles" EntitySet="ManagersRoles" />
+            <End Role="ManagerPrivileges" EntitySet="ManagerPrivileges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserGroups" Association="Self.FK_Users_UserGroups">
+            <End Role="UserGroups" EntitySet="UserGroups" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MZcms.Entity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Users">
+          <Documentation>
+            <Summary>用户类</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>用户ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="GroupId" Type="Int64" Nullable="false" >
+            <Documentation>
+              <Summary>用户组ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" >
+            <Documentation>
+              <Summary>用户名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" >
+            <Documentation>
+              <Summary>盐值</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" >
+            <Documentation>
+              <Summary>密码</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>手机号</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>邮箱</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Avatar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>头像</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="NickName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" >
+            <Documentation>
+              <Summary>昵称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IsMale" Type="Boolean" Nullable="false" >
+            <Documentation>
+              <Summary>性别</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Birthday" Type="DateTime" Precision="3" >
+            <Documentation>
+              <Summary>生日</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>地区</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>地址</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="QQ" Type="String" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>QQ</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" >
+            <Documentation>
+              <Summary>账户余额</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Point" Type="Int32" >
+            <Documentation>
+              <Summary>账户积分</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Exp" Type="Int32" >
+            <Documentation>
+              <Summary>经验</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Status" Type="Int32" >
+            <Documentation>
+              <Summary>状态</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="RegDate" Type="DateTime" Precision="3" Nullable="false" >
+            <Documentation>
+              <Summary>注册日期</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="RegIP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>注册IP</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" >
+            <Documentation>
+              <Summary>上一次登录日期</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="UserGroups" Relationship="MZcms.Entity.FK_Users_UserGroups" FromRole="Users" ToRole="UserGroups" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Managers" EntityType="MZcms.Entity.Managers" />
+          <EntitySet Name="ManagerLog" EntityType="MZcms.Entity.ManagerLog" />
+          <EntitySet Name="UserGroups" EntityType="MZcms.Entity.UserGroups" />
+          <EntitySet Name="SiteSettings" EntityType="MZcms.Entity.SiteSettings" />
+          <EntitySet Name="ManagerPrivileges" EntityType="MZcms.Entity.ManagerPrivileges" />
+          <EntitySet Name="ManagersRoles" EntityType="MZcms.Entity.ManagersRoles" />
+          <AssociationSet Name="FK_ManagerPrivileges_ManagersRoles" Association="MZcms.Entity.FK_ManagerPrivileges_ManagersRoles">
+            <End Role="ManagersRoles" EntitySet="ManagersRoles" />
+            <End Role="ManagerPrivileges" EntitySet="ManagerPrivileges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerLog_Managers" Association="MZcms.Entity.FK_ManagerLog_Managers">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="ManagerLog" EntitySet="ManagerLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserGroups" Association="MZcms.Entity.FK_Users_UserGroups">
+            <End Role="UserGroups" EntitySet="UserGroups" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>管理员ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="RoleId" Type="Int64" Nullable="false" >
+            <Documentation>
+              <Summary>角色ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" >
+            <Documentation>
+              <Summary>用户名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" >
+            <Documentation>
+              <Summary>密码</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" >
+            <Documentation>
+              <Summary>盐值</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Avatar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>头像</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>真名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>手机号</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddDate" Type="DateTime" Precision="3" Nullable="false" >
+            <Documentation>
+              <Summary>添加日期</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="ManagerLog" Relationship="MZcms.Entity.FK_ManagerLog_Managers" FromRole="Managers" ToRole="ManagerLog" />
+        </EntityType>
+        <EntityType Name="ManagerLog">
+          <Documentation>
+            <Summary>管理员日志</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>日志ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserId" Type="Int64" Nullable="false" >
+            <Documentation>
+              <Summary>用户ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>用户名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ActionType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>动作类型</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>备注</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>用户ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" >
+            <Documentation>
+              <Summary>添加日期</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Managers" Relationship="MZcms.Entity.FK_ManagerLog_Managers" FromRole="ManagerLog" ToRole="Managers" />
+        </EntityType>
+        <EntityType Name="UserGroups">
+          <Documentation>
+            <Summary>用户组</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>会员组ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Grade" Type="Int32" >
+            <Documentation>
+              <Summary>等级</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UpgradeExp" Type="Int32" >
+            <Documentation>
+              <Summary>升级需要经验值</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" >
+            <Documentation>
+              <Summary>预存金额</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Point" Type="Int32" >
+            <Documentation>
+              <Summary>默认积分</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" >
+            <Documentation>
+              <Summary>是否默认</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IsUpgrade" Type="Boolean" Nullable="false" >
+            <Documentation>
+              <Summary>是否自动升级</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IsLock" Type="Boolean" Nullable="false" >
+            <Documentation>
+              <Summary>是否锁定</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Users" Relationship="MZcms.Entity.FK_Users_UserGroups" FromRole="UserGroups" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="SiteSettings">
+          <Documentation>
+            <Summary>站点设置</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>设置ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" >
+            <Documentation>
+              <Summary>键</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" >
+            <Documentation>
+              <Summary>值</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="ManagerPrivileges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" >
+            <Documentation>
+              <Summary>权限自增长ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Privilege" Type="Int32" Nullable="false" >
+            <Documentation>
+              <Summary>权限ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="RoleId" Type="Int64" Nullable="false" >
+            <Documentation>
+              <Summary>角色ID</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="ManagersRoles" Relationship="MZcms.Entity.FK_ManagerPrivileges_ManagersRoles" FromRole="ManagerPrivileges" ToRole="ManagersRoles" />
+        </EntityType>
+        <EntityType Name="ManagersRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ManagerPrivileges" Relationship="MZcms.Entity.FK_ManagerPrivileges_ManagersRoles" FromRole="ManagersRoles" ToRole="ManagerPrivileges" />
+        </EntityType>
+        <Association Name="FK_ManagerPrivileges_ManagersRoles">
+          <End Type="MZcms.Entity.ManagersRoles" Role="ManagersRoles" Multiplicity="1" />
+          <End Type="MZcms.Entity.ManagerPrivileges" Role="ManagerPrivileges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagersRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManagerPrivileges">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerLog_Managers">
+          <End Type="MZcms.Entity.Managers" Role="Managers" Multiplicity="1" />
+          <End Type="MZcms.Entity.ManagerLog" Role="ManagerLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManagerLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserGroups">
+          <End Type="MZcms.Entity.UserGroups" Role="UserGroups" Multiplicity="1" />
+          <End Type="MZcms.Entity.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MZcmsEntityStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MZcms.Entity.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="IsMale" ColumnName="IsMale" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="QQ" ColumnName="QQ" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="RegIP" ColumnName="RegIP" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="MZcms.Entity.Managers">
+              <MappingFragment StoreEntitySet="Managers">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagerLog">
+            <EntityTypeMapping TypeName="MZcms.Entity.ManagerLog">
+              <MappingFragment StoreEntitySet="ManagerLog">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="UserIP" ColumnName="UserIP" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroups">
+            <EntityTypeMapping TypeName="MZcms.Entity.UserGroups">
+              <MappingFragment StoreEntitySet="UserGroups">
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="IsUpgrade" ColumnName="IsUpgrade" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UpgradeExp" ColumnName="UpgradeExp" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteSettings">
+            <EntityTypeMapping TypeName="MZcms.Entity.SiteSettings">
+              <MappingFragment StoreEntitySet="SiteSettings">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagerPrivileges">
+            <EntityTypeMapping TypeName="MZcms.Entity.ManagerPrivileges">
+              <MappingFragment StoreEntitySet="ManagerPrivileges">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Privilege" ColumnName="Privilege" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagersRoles">
+            <EntityTypeMapping TypeName="MZcms.Entity.ManagersRoles">
+              <MappingFragment StoreEntitySet="ManagersRoles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
