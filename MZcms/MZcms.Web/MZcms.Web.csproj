@@ -335,7 +335,9 @@
     <Content Include="Areas\Admin\Scripts\layui\lay\modules\tree.js" />
     <Content Include="Areas\Admin\Scripts\layui\lay\modules\upload.js" />
     <Content Include="Areas\Admin\Scripts\layui\lay\modules\util.js" />
-    <Content Include="Areas\Admin\Scripts\Login.js" />
+    <Content Include="Areas\Admin\Scripts\LoginIndex.js" />
+    <Content Include="Areas\Admin\Scripts\ManagerManagement.js" />
+    <Content Include="Areas\Admin\Scripts\PrivilegeManagement.js" />
     <Content Include="Content\artdialog.css" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Web\Views\_ViewStart.cshtml" />
