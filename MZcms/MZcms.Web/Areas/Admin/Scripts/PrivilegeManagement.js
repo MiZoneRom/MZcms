@@ -31,9 +31,9 @@ function query() {
                     field: "operation", operation: true, title: "操作", align: "right",
                     formatter: function (value, row, index) {
                         var id = row.Id.toString();
-                        var html = ["<span class=\"btn-a\">"];
-                        html.push("<a href='./Edit/" + id + "'>编辑</a>");
-                        html.push("<a onclick=\"Delete('" + id + "');\">删除</a>");
+                        var html = ["<span class=\"btn-group\">"];
+                        html.push("<a class=\"btn btn-default btn-sm\" href='./Edit/" + id + "'>编辑</a>");
+                        html.push("<span class=\"btn btn-danger btn-sm\" onclick=\"Delete('" + id + "');\">删除</span>");
                         html.push("</span>");
                         return html.join("");
                     }

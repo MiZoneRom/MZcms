@@ -8,16 +8,15 @@
 
         <div class="col-md-9">
 
-            <form class="form-horizontal" role="form">
+            <form role="form">
 
                 <div class="card">
 
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label class="control-label">权限组名：</label>
-                            @Html.TextBoxFor(item => item.RoleName, new { @class = "form-control input-sm" })
-                            <span class="help-block">@Html.ValidationMessageFor(item => item.RoleName)</span>
+                            @Html.TextBoxFor(item => item.RoleName, new { @class = "form-control input-sm", @placeholder = "请填写权限组名" })
+                            <span class="form-text text-muted">@Html.ValidationMessageFor(item => item.RoleName)</span>
                         </div>
 
                         <div class="callout">
@@ -27,8 +26,6 @@
                             </div>
                         </div>
 
-
-
                         @foreach (var p in (ViewBag.Privileges as MZcms.CommonModel.Privileges).Privilege)
                         {
                             <div class="card">
@@ -36,7 +33,7 @@
                                 <div class="card-header">
                                     <h4 class="card-title">
                                         <span class="icheck-primary">
-                                            <input type="checkbox" id="check_@p.GroupName">
+                                            <input type="checkbox" id="check_@p.GroupName" name="privilege_group">
                                             <label for="check_@p.GroupName">@p.GroupName</label>
                                         </span>
                                     </h4>
@@ -71,10 +68,7 @@
 </div>
 
 @section Scripts{
-
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Areas/Admin/Scripts/PrivilegeAdd.js"></script>
-
-
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }

@@ -18,7 +18,7 @@ namespace MZcms.Web.Areas.Admin.Models
         public long ID { get;set; }
 
         //权限列表
-      public  IEnumerable<ManagerPrivileges> RolePrivilegeInfo { set; get; }
+      public  IEnumerable<ManagerPrivileges> ManagerPrivileges { set; get; }
     }
   
 }

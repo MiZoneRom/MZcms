@@ -68,6 +68,7 @@ function generateRoleInfo() {
 
 function submitRole() {
     var object;
+
     if ($('form').valid()) {
         try {
             object = generateRoleInfo();
@@ -76,7 +77,7 @@ function submitRole() {
             var loading = showLoading();
             $.post('./' + $("#ID").val(), { roleJson: objectString }, function (result) {
                 if (result.success) {
-                    $.dialog.tips('保存成功', function () { location.href = './../management'; });
+                    $.dialog.tips('保存成功', function () { location.href = './../Management'; });
                 }
                 else
                     $.dialog.errorTips('保存失败！' + result.msg);
