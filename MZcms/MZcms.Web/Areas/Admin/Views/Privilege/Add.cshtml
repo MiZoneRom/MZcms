@@ -1,0 +1,80 @@
+﻿@model MZcms.Web.Areas.Admin.Models.RoleInfoModel
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-3">
+            <a class="btn btn-primary btn-block" href="./Add">添加权限组</a>
+        </div>
+
+        <div class="col-md-9">
+
+            <form class="form-horizontal" role="form">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label class="control-label">权限组名：</label>
+                            @Html.TextBoxFor(item => item.RoleName, new { @class = "form-control input-sm" })
+                            <span class="help-block">@Html.ValidationMessageFor(item => item.RoleName)</span>
+                        </div>
+
+                        <div class="callout">
+                            <div class="icheck-primary d-inline">
+                                <input value="0" type="checkbox" id="checkall">
+                                <label for="checkall">权限设置（全选 ）</label>
+                            </div>
+                        </div>
+
+
+
+                        @foreach (var p in (ViewBag.Privileges as MZcms.CommonModel.Privileges).Privilege)
+                        {
+                            <div class="card">
+
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        <span class="icheck-primary">
+                                            <input type="checkbox" id="check_@p.GroupName">
+                                            <label for="check_@p.GroupName">@p.GroupName</label>
+                                        </span>
+                                    </h4>
+                                </div>
+
+                                <div class="card-body">
+                                    @foreach (var item in p.Items)
+                                    {
+                                        <div class="icheck-primary d-inline">
+                                            <input name="privilege" value="@item.PrivilegeId" type="checkbox" id="check_@item.PrivilegeId"><label for="check_@item.PrivilegeId">@item.Name</label>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" onclick="submitRole()" class="btn btn-primary">保 存</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/Scripts/PrivilegeAdd.js"></script>
+
+
+}
