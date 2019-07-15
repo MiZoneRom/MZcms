@@ -9,41 +9,61 @@
         <div class="col-md-9">
 
             <form role="form">
-                <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">权限组名：</label>
-                    <div class="col-sm-3">
-                        @Html.TextBoxFor(item => item.RoleName, new { @class = "form-control input-sm" })
-                    </div>
-                    <div class="col-sm-3">@Html.ValidationMessageFor(item => item.RoleName)</div>
-                </div>
-                @Html.HiddenFor(item => item.ID)
-                <div class="form-group">
-                    <label for="" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-9">
-                        <label class="checkbox-inline power-check-all"><input value="0" id="CheckAll" name="CheckAll" type="checkbox">权限设置（全选 ）</label>
-                        <ul class="checkbox-list">
-                            @foreach (var p in (ViewBag.Privileges as MZcms.CommonModel.Privileges).Privilege)
-                            {
-                                <li>
 
-                                    <label class="checkbox-inline parent-check"><input type="checkbox">@p.GroupName</label>
-                                    <p>
-                                        @foreach (var item in p.Items)
-                                        {
-                                            <label class="checkbox-inline"><input name="privilege" value="@item.PrivilegeId" type="checkbox">@item.Name</label>
-                                        }
-                                    </p>
-                                </li>
-                            }
-                        </ul>
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(item => item.RoleName, new { @class = "form-control input-sm", @placeholder = "请填写权限组名" })
+                            <span class="form-text text-muted">@Html.ValidationMessageFor(item => item.RoleName)</span>
+                        </div>
+
+                        @Html.HiddenFor(item => item.ID)
+
+                        <div class="callout">
+                            <div class="icheck-primary d-inline">
+                                <input value="0" type="checkbox" id="checkall">
+                                <label for="checkall">权限设置（全选 ）</label>
+                            </div>
+                        </div>
+
+                        @foreach (var p in (ViewBag.Privileges as MZcms.CommonModel.Privileges).Privilege)
+                        {
+                            <div class="card">
+
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        <span class="icheck-primary">
+                                            <input type="checkbox" id="check_@p.GroupName" name="privilege_group">
+                                            <label for="check_@p.GroupName">@p.GroupName</label>
+                                        </span>
+                                    </h4>
+                                </div>
+
+                                <div class="card-body">
+                                    @foreach (var item in p.Items)
+                                    {
+                                        <div class="icheck-primary d-inline">
+                                            <input name="privilege" value="@item.PrivilegeId" type="checkbox" id="check_@item.PrivilegeId"><label for="check_@item.PrivilegeId">@item.Name</label>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                        }
+
+                        @Html.Hidden("hdPrivileges", (string)ViewBag.RolePrivilegeInfo)
+
+                        <div class="card-footer">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" onclick="submitRole()" class="btn btn-primary">保 存</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                @Html.Hidden("hdPrivileges", (string)ViewBag.RolePrivilegeInfo)
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" onclick="submitRole()" class="btn btn-primary">保 存</button>
-                    </div>
-                </div>
+
             </form>
         </div>
 
@@ -51,7 +71,7 @@
 </div>
 
 @section Scripts{
+    <script src="~/Areas/Admin/Scripts/PrivilegeEdit.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Areas/Admin/Scripts/PrivilegeEdit.js"></script>
 }

@@ -3,7 +3,8 @@ $(function () {
     RestorePrivileges();
     RestoreCheck();
     $('#RoleName').focus();
-})
+});
+
 function RestorePrivileges() {
 
     var privileges = $("#hdPrivileges").val();
@@ -17,6 +18,7 @@ function RestorePrivileges() {
             $(Jsonprivileges).each(function (index, item) {
                 $("input[value='" + item.Privilege + "']").attr("checked", true)
             });
+
         }
     }
 

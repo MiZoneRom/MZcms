@@ -239,6 +239,7 @@
     <Content Include="Areas\Admin\Scripts\PrivilegeAdd.js" />
     <Content Include="Areas\Admin\Scripts\PrivilegeEdit.js" />
     <Content Include="Areas\Admin\Scripts\PrivilegeManagement.js" />
+    <Content Include="Areas\Admin\Scripts\SiteSettingEdit.js" />
     <Content Include="Content\artdialog.css" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Web\Views\_ViewStart.cshtml" />
