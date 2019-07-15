@@ -1,5 +1,7 @@
 # MiZone Content Management Systems
 
+![image]https://raw.githubusercontent.com/MiZoneRom/MZcms/master/Resources/Logo.png  
+
 MZcms is an MIT-licensed open source project with its ongoing development made possible entirely by the support of these awesome [backers](https://github.com/MiZoneRom/MZcms/edit/master/README.md). If you'd like to join them, please consider:
 
 ## Introduction
@@ -37,6 +39,6 @@ StackExchange.Redis.1.0.488
 WebGrease.1.5.2  
 zxing  
 ## Backstage Style
-admin-lte https://github.com/ColorlibHQ/AdminLTE
-bootstrap https://github.com/twbs/bootstrap
-artdialog https://github.com/aui/artDialog
+admin-lte https://github.com/ColorlibHQ/AdminLTE  
+bootstrap https://github.com/twbs/bootstrap  
+artdialog https://github.com/aui/artDialog  
