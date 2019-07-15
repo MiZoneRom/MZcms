@@ -34,10 +34,10 @@
 
                     str += `
                     <div ${display} class="upload-box">
-                        <i class="fa fa-upload"></i>
+                        <i class="fas fa-upload"></i>
                         <img ${show} src="${(opts.displayImgSrc[i] ? opts.displayImgSrc[i] : '')}" class="img-upload"/>
                         <span class="remove-img" ${show} >删除</span>
-                        <span class="btn btn-primary" ${hide} ><i class="fa fa-upload"></i>上传
+                        <span class="btn btn-primary" ${hide} ><i class="fas fa-upload"></i>&nbsp;上传
                             <input type="hidden" class="hiddenImgSrc" value="${(opts.displayImgSrc[i] ? opts.displayImgSrc[i] : imgSrc)}"  name="${opts.imgFieldName}" />
                             <input class="file uploadFilebtn" type="file" name="_file"   id="imgUploader_${id}_${i}"/>
                             <input type="hidden" class="hidOrientation" name="hidFileMaxSize" />
@@ -63,9 +63,9 @@
                     var display = opts.displayImgSrc[i] || i == 0 ? '' : ' style="display:none"';
                     str += `
                     <div ${display} class="upload-box">
-                        <span class="btn btn-preview"><i class="fa fa-upload"></i></span>
+                        <span class="btn btn-preview"><i class="fas fa-images"></i></span>
                         <span class="btn btn-primary btn-upload">
-                            <i class="fa fa-upload"></i>上传
+                            <i class="fas fa-upload"></i>&nbsp;上传
                             <input type="hidden" class="hiddenImgSrc" value="${(opts.displayImgSrc[i] ? opts.displayImgSrc[i] : imgSrc)}"  name="${opts.imgFieldName}" />
                             <input class="file uploadFilebtn" type="file" name="_file"   id="imgUploader_${id}_${i}" />
                             <input type="hidden" class="hidOrientation" name="hidFileMaxSize" />
