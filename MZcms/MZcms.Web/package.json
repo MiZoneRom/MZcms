@@ -1,0 +1,15 @@
+{
+  "name": "React.Sample.Mvc4",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint:ts": "tsc"
+  },
+  "devDependencies": {
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.4",
+    "@types/reactstrap": "8.0.1",
+    "typescript": "3.5.3"
+  }
+}
