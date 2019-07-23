@@ -1,10 +1,12 @@
-﻿
+﻿import React from 'react';
 
 ReactDOM.render(
     <div>
-        <antd.Button type="primary">Primary</antd.Button>
-        <antd.Button>Default</antd.Button>
-        <antd.Button type="dashed">Dashed</antd.Button>
-        <antd.Button type="danger">Danger</antd.Button>
-    </div>
-    , document.getElementById('root'));
+        <Button type="primary">Primary</Button>
+        <Button>Default</Button>
+        <Button type="dashed">Dashed</Button>
+        <Button type="danger">Danger</Button>
+        <Button type="link">Link</Button>
+    </div>,
+    mountNode,
+);

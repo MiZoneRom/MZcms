@@ -275,6 +275,13 @@
     <Content Include="Areas\Admin\Scripts\PrivilegeManagement.js" />
     <Content Include="Areas\Admin\Scripts\SiteSettingEdit.js" />
     <Content Include="Content\artdialog.css" />
+    <Content Include="Content\components\comments\Sample.jsx" />
+    <Content Include="Content\components\emotion.jsx" />
+    <Content Include="Content\components\expose-components.js" />
+    <Content Include="Content\components\home.jsx" />
+    <Content Include="Content\components\lazy-load.jsx" />
+    <Content Include="Content\components\react-jss.jsx" />
+    <Content Include="Content\components\styled-components.jsx" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Web\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Web\Views\Shared\_Normal.cshtml" />

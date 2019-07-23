@@ -26,6 +26,14 @@ namespace MZcms.Web
             //	.SetLoadBabel(false)
             //	.AddScriptWithoutTransform("~/Scripts/bundle.server.js")
 
+            ReactSiteConfiguration.Configuration
+                    .SetReuseJavaScriptEngines(true)
+                    .SetLoadBabel(false)
+                    .SetLoadReact(false)
+                    .AddScriptWithoutTransform("~/dist/runtime.js")
+                    .AddScriptWithoutTransform("~/dist/vendor.js")
+                    .AddScriptWithoutTransform("~/dist/components.js");
+
             JsEngineSwitcher.Current.DefaultEngineName = V8JsEngine.EngineName;
             JsEngineSwitcher.Current.EngineFactories.AddV8();
 
