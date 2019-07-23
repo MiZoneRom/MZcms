@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using System.Web.Optimization;
-using System.Web.Optimization.React;
 
 namespace MZcms.Web
 {
@@ -27,17 +26,6 @@ namespace MZcms.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-
-            bundles.Add(new ScriptBundle("~/Bundles/Admin/Script/Lib").Include(
-                                "~/Scripts/react/react.development.js",
-                                "~/Scripts/react-dom/react-dom.development.js",
-                                "~/Scripts/moment/moment.js",
-                                "~/Scripts/antd/antd.js"
-                                ));
-
-            bundles.Add(new BabelBundle("~/Bundles/Admin")
-                .IncludeDirectory("~/Areas/Admin/Scripts", "*.jsx", true)
-                );
 
 
             // 将 EnableOptimizations 设为 false 以进行调试。有关详细信息，
